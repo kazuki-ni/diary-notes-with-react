@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 
 
-class Calendar extends Component {
+class Bookmark extends Component {
 
 	// constructor( props ) {
 	// 	super( props );
@@ -12,11 +12,11 @@ class Calendar extends Component {
 		return (
 
             <div>
-                <h1>Calendar</h1>
+                <h1>Bookmark</h1>
             </div>
 
 		);
 	}
 }
 
-export default Calendar;
+export default Bookmark;

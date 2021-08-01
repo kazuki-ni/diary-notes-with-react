@@ -1,6 +1,7 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 
+import { toggleSidebar } from './SidebarItemVariables';
 
 const SidebarItem = ( props ) => {
 
@@ -51,7 +52,7 @@ const SidebarItem = ( props ) => {
 					<i
 						className={'bx ' + item.icon}
 						id="github"
-						onClick={props.toggleSidebar}
+						onClick={toggleSidebar}
 					/>
 					<span className="tooltip">{item.tooltip}</span>
 				</li>
@@ -66,7 +67,7 @@ const SidebarItem = ( props ) => {
 						<i className={'bx ' + item.icon} />
 						<span
 							className="links_name"
-							onClick={props.toggleSidebar}
+							onClick={toggleSidebar}
 						>
 							{item.links_name}
 						</span>

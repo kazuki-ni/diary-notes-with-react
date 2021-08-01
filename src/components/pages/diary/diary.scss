@@ -1,0 +1,201 @@
+$sizes: md, sm;
+
+$breakpoint-down: (
+  'sm': 'screen and (max-width: 800px)',
+  'md': 'screen and (max-width: 1024px)',
+) !default;
+
+//mixinを定義（初期値はmd）
+@mixin mq-down($breakpoint: md) {
+  @media #{map-get($breakpoint-down, $breakpoint)} {
+    @content;
+  }
+}
+
+#diary-root{
+  font-family: serif, "Times New Roman";
+  height: 100vh;
+  display: grid;
+  grid-template-rows: 1fr 9fr 78px;
+  background: center / cover no-repeat url("./02.jpg");
+
+  @include mq-down("md") {
+    grid-template-rows: 1fr 9fr 78px;
+  }
+  @include mq-down("sm") {
+    grid-template-rows: 2fr 10fr 78px;
+  }
+
+  .header{
+    font-family: inherit;
+    display: grid;
+    grid-template-columns: 300px 1fr;
+    grid-template-rows: 65px;
+    margin: 10px 30px 0;
+
+    @include mq-down("sm") {
+      height: 130px;
+      grid-template-columns: 1fr;
+      grid-template-rows: 65px 1fr;
+    }
+
+    .diary-date{
+      font-family: inherit;
+      color: rgb(206, 199, 199);
+      text-shadow: black 1px 0 10px;
+      padding-left: 10px;
+      font-style: italic;
+
+      .diary-day{
+        font-family: inherit;
+        font-size: 1.5em;
+        padding-right: 20px;
+      }
+      .diary-month{
+        font-family: inherit;
+        font-size: 1em;
+        padding-right: 15px;
+      }
+      .diary-year{
+        font-family: inherit;
+        font-style: italic;
+        font-size: 1em;
+      }
+    }
+
+    .nav{
+      position: relative;
+      margin: 10px 30px 18px 0;
+      padding-top: 5px;
+      border-radius: 10px;
+      background-color:rgba(255, 255, 255, 0.541);
+      height: 60px;
+      width: 100%;
+      overflow-x: auto;
+      overflow-y: hidden;
+
+      @include mq-down("sm") {
+        margin: 0 30px 0 0;
+      }
+    }
+  }
+
+  .diary{
+    font-family: inherit;
+    margin: 0 30px 20px;
+    padding: 0;
+    display: grid;
+    grid-template-rows: 1fr 8fr;
+    grid-template-columns: 1fr 1fr;
+    grid-template-areas:
+      "diary-img diary-title"
+      "diary-img diary-content";
+
+    @include mq-down("md") {
+      grid-template-rows: 200px 1fr 7fr;
+      grid-template-columns: 1fr;
+      grid-template-areas:
+        "diary-img"
+        "diary-title"
+        "diary-content";
+    }
+    @include mq-down("sm") {
+      grid-template-rows: 200px 1fr 6fr;
+      grid-template-columns: 1fr;
+      grid-template-areas:
+        "diary-img"
+        "diary-title"
+        "diary-content";
+    }
+
+    #diary-img{
+      background-color:rgba(255, 255, 255, 0.3);
+      border: 1px solid black;
+      border-radius: 10px;
+      padding: 20px;
+      margin-bottom: 10px;
+      grid-area: diary-img;
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      object-position: center;
+
+      @include mq-down("md") {
+        width: 100%;
+        height: 200px;
+      }
+
+    }
+
+    .diary-title{
+      font-family: inherit;
+      background-color:rgba(255, 255, 255, 0.5);
+      font-size: 2em;
+      border: 1px solid black;
+      border-radius: 10px;
+      padding: 5px;
+      padding-left: 20px;
+      resize: none;
+      outline: none;
+      grid-area: diary-title;
+    }
+    .diary-content{
+      font-family: inherit;
+      background-color:rgba(255, 255, 255, 0.5);
+      font-size: 1.2em;
+      border: 1px solid black;
+      border-radius: 10px;
+      padding: 10px;
+      padding-left: 20px;
+      resize: none;
+      outline: none;
+      grid-area: diary-content;
+    }
+  }
+
+  .footer{
+    padding: 0;
+    background-color:rgba(255, 255, 255, 0.5);
+    position: relative;
+    margin: 0 30px 18px;
+    border-radius: 10px;
+    height: 60px;
+    overflow-x: auto;
+    overflow-y: hidden;
+    align-self: flex-end;
+
+    &::-webkit-scrollbar{
+      height: 10px;
+    }
+
+    &::-webkit-scrollbar-track{
+      background: rgba(0, 0, 0, 0);
+      border: none;
+    }
+
+    &::-webkit-scrollbar-thumb{
+      background: rgba(33, 77, 24, 0.7);
+      border-radius: 10px;
+      box-shadow: inset 0 0 4px rgba(255,255,255,0.8);
+    }
+
+    .diary-bg-img-list{
+      display: flex;
+      list-style: none;
+      width: 100%;
+
+      li {
+        margin-right: 2px;
+      }
+
+      .diary-bg-img{
+        border-radius: 5px;
+        height: 50px;
+        object-fit: contain;
+        &::selection{
+          background-color: transparent;
+        }
+      }
+    }
+  }
+}

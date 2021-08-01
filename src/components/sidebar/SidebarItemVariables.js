@@ -11,17 +11,17 @@ const sidebar_item = [{
         "links_name": "Dashboard",
         "tooltip": "Dashboard"
     }}, {
+    "Diary": {
+        "href": "/howareyou",
+        "icon": "bx-book-open",
+        "links_name": "Today's Diary",
+        "tooltip": "Today's Diary"
+    }}, {
     "Calendar": {
         "href": "/calendar",
         "icon": "bx-calendar",
         "links_name": "Calendar",
         "tooltip": "Calendar"
-    }}, {
-    "Diary": {
-        "href": "/diary",
-        "icon": "bx-chat",
-        "links_name": "Today's Diary",
-        "tooltip": "Today's Diary"
     }}, {
     "Discover": {
         "href": "/discover",
@@ -29,11 +29,17 @@ const sidebar_item = [{
         "links_name": "Discover",
         "tooltip": "Discover"
     }}, {
-        "Liked": {
-            "href": "/liked",
-            "icon": "bx-heart",
-            "links_name": "Liked",
-            "tooltip": "Liked"
+    "Liked": {
+        "href": "/liked",
+        "icon": "bx-heart",
+        "links_name": "Liked",
+        "tooltip": "Liked"
+    }}, {
+    "Bookmark": {
+        "href": "/bookmark",
+        "icon": "bx-bookmark-alt",
+        "links_name": "Bookmarks",
+        "tooltip": "Bookmarks"
     }}, {
     "Account": {
         "href": "/account",

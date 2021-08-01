@@ -30,7 +30,7 @@ ul#mood-list li.mood-item{
     justify-items: center;
     align-content: center;
     text-align: center;
-		background-color: rgba(0, 0, 0, 0.4);
+    background-color: rgba(0, 0, 0, 0.4);
 }
 ul#mood-list li.mood-item:nth-child(1){
     border: #4AA96C solid 3px;

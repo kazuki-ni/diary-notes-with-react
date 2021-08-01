@@ -6,7 +6,6 @@ import reportWebVitals from './reportWebVitals';
 import App from './App';
 import Sidebar from './components/sidebar/Sidebar';
 
-
 ReactDOM.render(
   <React.StrictMode>
     <Router>
