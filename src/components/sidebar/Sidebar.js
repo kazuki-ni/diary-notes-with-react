@@ -1,5 +1,5 @@
 import SidebarItem from './SidebarItem';
-import { sidebar_item, toggleSidebar } from './SidebarItemVariables';
+import { sidebar_item, toggleSidebar } from './sidebar_variables';
 import './sidebar.css';
 
 const Sidebar = () => {

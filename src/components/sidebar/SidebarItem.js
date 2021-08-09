@@ -1,7 +1,7 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 
-import { toggleSidebar } from './SidebarItemVariables';
+import { toggleSidebar } from './sidebar_variables';
 
 const SidebarItem = ( props ) => {
 
