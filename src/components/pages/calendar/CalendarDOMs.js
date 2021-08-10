@@ -1,6 +1,6 @@
 import React from 'react'
 
-import { firstDayOfMonth, weekdays, months, holiday_list, days_list } from "./calendar_variables";
+import { firstDayOfMonth, weekdays, months, holiday_list, days_list } from "./calendarVariables";
 
 const CalendarHeader = (props) => {
 

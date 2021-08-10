@@ -4,8 +4,12 @@ import diaryRoute from './routes/diaryRoute.js';
 
 import cors from "cors";
 import express from 'express';
-const app = express();
+// import favicon from "serve-favicon";
+// import path from "path";
 
+const app = express();
+// const dirname = path.dirname(new URL(import.meta.url).pathname)
+// app.use(favicon(path.join(dirname, '../public', 'favicon.ico')))
 app.use(cors({
   origin: 'http://localhost:3000', //permit
   credentials: true, //add Access-Control-Allow-Credentials

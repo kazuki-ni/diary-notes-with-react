@@ -16,12 +16,13 @@ const toggleImageFunc = (bool) => {
 }
 
 const inputDiaryFromDB = (diary) => {
+  document.getElementById("diary-root").style.backgroundImage = diary.bg;
   document.getElementById("diary-title").value = diary.title;
   document.getElementById("diary-content").value = diary.content;
-  console.log("Input diary because DB has the data of diary on " + diary.date);
+  console.log("Input diary because DB has a diary on " + diary.date);
 }
 
-const setDiaryImage = (bool=true) => {
+const setDiaryImage =  (bool = true ) => {
   if (!bool) {return}
 
   let img_area_w, img_area_h

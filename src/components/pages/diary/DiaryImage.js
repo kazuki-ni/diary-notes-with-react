@@ -1,4 +1,4 @@
-import { addLi } from "./convert_to_base64";
+import { addLi } from "./convertToBase64";
 
 export const DiaryImage = (props) => {
 

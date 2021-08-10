@@ -14,7 +14,7 @@ import Liked from "./components/pages/Liked"
 import Bookmark from "./components/pages/Bookmark"
 import Setting from "./components/pages/Setting"
 
-import { today_date } from "src/components/pages/calendar/calendar_variables";
+import { today_date } from "src/components/pages/calendar/calendarVariables";
 
 class App extends Component {
   constructor(props) {

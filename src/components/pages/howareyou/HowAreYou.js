@@ -2,8 +2,8 @@ import React, { Component } from 'react'
 
 import { Link, withRouter } from 'react-router-dom'
 
-import { fetchDiary } from '../diary/diary_actions_to_server'
-import mood_imgs from "./mood_image_path"
+import { fetchDiary } from '../diary/diaryActionsToServer'
+import mood_imgs from "./moodImagePath"
 import "./howareyou.scss"
 
 class HowAreYou extends Component {
