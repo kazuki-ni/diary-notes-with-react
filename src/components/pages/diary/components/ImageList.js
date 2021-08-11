@@ -1,4 +1,4 @@
-import { bg_img_path, preview_img_path } from './diaryImagePath';
+import { bg_img_path, preview_img_path } from '../diaryImagePath';
 
 const ImageList = (props) => {
 

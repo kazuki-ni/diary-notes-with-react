@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 
 import { Link, withRouter } from 'react-router-dom'
 
-import { fetchDiary } from '../diary/diaryActionsToServer'
+import { fetchSingleDiary } from '../../../actions/diaryActions'
 import mood_imgs from "./moodImagePath"
 import "./howareyou.scss"
 
@@ -15,7 +15,7 @@ class HowAreYou extends Component {
 	}
 
 	diaryHasBeenWritten = async() => {
-		const diary = await fetchDiary(this.props.date)
+		const diary = await fetchSingleDiary(this.props.date)
 		// console.log(diary);
 		if (diary.date !== undefined) {
 			this.props.moodHandler(diary.mood);

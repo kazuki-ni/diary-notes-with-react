@@ -1,4 +1,4 @@
-import { insertDiary, findDiary } from '../operateDiaryDB.js';
+import { insertDiary, findDiary, gatherMoods } from '../operateDiaryDB.js';
 import express from 'express';
 
 const router = express.Router();
@@ -8,35 +8,36 @@ router.post('/input', (req, res) => {
   res.send("Input Diary")
 });
 
-router.get('/fetch/:date', async (req, res) => {
+router.get('/:date', async (req, res) => {
   const date = req.params.date;
-  console.log("Go fetch diary on " + date);
+  console.log("Come to server");
 
   let findSuccessfully = true;
-  const result = await findDiary(date).catch( error => {
+  const diary = await findDiary(date).catch( error => {
     findSuccessfully = false;
     console.error(error);
     return {};
   })
   console.log("findDiary: " + findSuccessfully);
 
-  res.send(result);
+  res.send(diary);
+});
 
-  // //* If signed in
-  // if (true) {
-  //   res.send({
-	// 		// date    : result.date, 		//* String 2021_0809
-	// 		mood    : result.mood, 		//* String "Happy"
-	// 		bg      : result.bg,      //* String
-	// 		imgs    : result.imgs,    //* Array
-	// 		title   : result.title,   //* String
-	// 		content : result.content  //* String
-  //   });
+router.get('/fetch/mood/:year&:month', async (req, res) => {
+  const year = req.params.year;
+  const month = req.params.month;
+  console.log("Come to server");
 
-  // //* not signed in
-  // } else {
-  //   ;
-  // }
+  let gatherSuccessfully = true;
+  const diary = await gatherMoods(year, month)
+    .catch( error => {
+      gatherSuccessfully = false;
+      console.error(error);
+      return {};
+    })
+  console.log("findDiary: " + gatherSuccessfully);
+
+  res.send(diary);
 });
 
 export default router;

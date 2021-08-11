@@ -53,5 +53,4 @@ const today_date =
 	( '00' + (today.getMonth()+1) ).slice( -2 )+
 	( '00' + today.getDate() ).slice( -2 )
 
-
 export { daysInMonth, firstDayOfMonth, weekdays, months, days_list, holiday_list, today_date };

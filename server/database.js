@@ -1,11 +1,25 @@
-// import { config } from './config.js';
-import { MongoClient } from 'mongodb';
+import { config } from './config.js';
+import mongoose from 'mongoose';
 
-// const uri = `mongodb+srv://${config.USER_NAME}:${config.USER_PASSWD}@${config.HOST_NAME}/${config.DB_NAME}?retryWrites=true&w=majority`;
+const mongodbUrl = config.MONGODB_URL;
 
-const uri = "mongodb+srv://nanora:kyohtaroh1013@bugkitarucluster.eynjb.mongodb.net/myFirstDatabase?retryWrites=true&w=majority";
+const connectMongo = async () => {
+  await mongoose.connect(mongodbUrl, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+    // useCreateIndex: true,
+  })
+    .then( result => {
+      console.log(
+        `Connected to Mongo! Database name: "${result.connections[0].name}"`
+      )
+    })
+    .catch( err => {
+      console.error('Error connecting to mongo', err);
+    });
 
-const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true });
-const notes = client.db("diary").collection("notes");
+  return mongoose;
+}
 
-export { client, notes };
+// export default connectMongo;
+connectMongo();

@@ -1,8 +1,12 @@
 import React, { Component } from "react";
 import { withRouter } from "react-router";
 
-import "./calendar.css";
-import{ CalendarHeader, WeekDaysTitle, Days, MonthSelector, YearSelector } from "./CalendarDOMs"
+import "./calendar.scss";
+import { CalendarHeader } from "./components/CalendarHeader";
+import { WeekDaysTitle } from "./components/WeekDaysTitle";
+import { Days } from "./components/Days";
+import { MonthSelector } from "./components/MonthSelector";
+import { YearSelector } from "./components/YearSelector";
 
 class Calendar extends Component {
 

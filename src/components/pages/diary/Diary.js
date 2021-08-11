@@ -1,11 +1,11 @@
 import React, { Component } from 'react'
 
 import "./diary.scss"
-import NavList from "./NavList"
-import ImageList from "./ImageList"
-import { DiaryImage } from "./DiaryImage"
+import NavList from "./components/NavList"
+import ImageList from "./components/ImageList"
+import { DiaryImage } from "./components/DiaryImage"
 import { months } from "src/components/pages/calendar/calendarVariables";
-import { inputDiary ,fetchDiary } from './diaryActionsToServer';
+import { inputDiary, fetchSingleDiary } from '../../../actions/diaryActions';
 import {
 	toggleImageFunc,
 	inputDiaryFromDB,
@@ -87,8 +87,8 @@ class Diary extends Component {
 	}
 
 	componentDidMount = async () => {
-		console.log("get to fetchDiary function")
-		await fetchDiary( this.date_num.join("_") )
+		console.log("get to fetchSingleDiary function")
+		await fetchSingleDiary( this.date_num.join("_") )
 			.then( diary => {
 				Object.keys(diary).map( key => (
 					console.log(`\t${key}: ${diary[key]}`)

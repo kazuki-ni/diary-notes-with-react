@@ -1,54 +1,48 @@
-import { client, notes } from "./database.js";
+import Diary from "./models/diaryModel.js"
 
 async function insertDiary(query) {
-  try {
-    await client.connect();
-
-    const result = await notes.insertOne(query);
-
-    console.log(
-      `${result.insertedCount} documents were inserted with the _id: ${result.insertedId}`,
-    );
-  } finally {
-    await client.close();
+  const diary = new Diary(query);
+  const newDiary = await diary.save().catch( error => {
+    console.error(error);
+    return {};
+  })
+  if (newDiary) {
+    console.log("A new diary is input:");
+    showDiary(newDiary);
+  } else {
+    console.log(newDiary);
   }
+  return newDiary;
 }
 
 async function findDiary(date) {
-  await client.connect().catch((error)=>{console.log(error); return;});
-  const result = await notes.findOne({date: date}).catch( error => {
-    console.error(error);
-    return {};
-  });
-  showDiary(result);
-  await client.close().catch(error=>console.log(error));
-  return result;
+  const diary = await Diary.findOne({date: date}).catch( error => {
+      console.error(error);
+      return {};
+    });
+  if (diary !== null) {
+    showDiary(diary);
+  } else {
+    console.log("Diary is null")
+  }
+  return diary;
+}
 
-  // try {
-  //   await client.connect();
+async function gatherMoods(year, month) {
+  const diaries = await Diary.find({
+    year: year,
+    month: month
+  }).catch( error => {
+      console.error(error);
+      return {};
+    });
 
-  //   const result = await notes.findOne({date: date}) || {};
-  //   console.log(result);
-  //   // showDiary(result);
-  //   return result;
+  const moods = {};
+  diaries.map( diary =>
+    moods[diary.day] = diary.mood
+  )
 
-  // } catch (error) {
-  //   console.warn("Fail to find a diary due to ", error)
-  //   // const result = {
-  //   //   mood: "",
-  //   //   bg: "",
-  //   //   imgs: [],
-  //   //   title: "",
-  //   //   content: ""
-  //   // };
-  //   // showDiary(result);
-  //   // return result;
-  //   throw(error);
-
-  //* Anyway, show diary
-  // } finally {
-  //   await client.close();
-  // }
+  return moods;
 }
 
 const showDiary = (result) => {
@@ -69,4 +63,4 @@ const showDiary = (result) => {
   console.log("---------------------------------------------");
 }
 
-export { insertDiary, findDiary };
+export { insertDiary, findDiary, gatherMoods };
