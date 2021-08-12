@@ -9,18 +9,29 @@ import "./howareyou.scss"
 class HowAreYou extends Component {
 	constructor( props ) {
 		super( props );
-		if (this.diaryHasBeenWritten()) {
-			this.props.history.push("/diary/" + this.props.date);
-		}
+
+		this.checkDiaryHasBeenWritten();
 	}
 
-	diaryHasBeenWritten = async() => {
-		const diary = await fetchSingleDiary(this.props.date)
-		// console.log(diary);
-		if (diary !== null) {
-			this.props.moodHandler(diary.mood);
-			return true
-		}
+	checkDiaryHasBeenWritten = async () => {
+		console.log("get to fetchSingleDiary function")
+		await fetchSingleDiary( this.props.date )
+			.then( diary => {
+				console.info(diary)
+				switch (diary) {
+					case null:
+						console.log("Diary hasn't been written.");
+						break;
+					default:
+						console.log("Diary has been written. Move to the diary page.")
+						this.props.moodHandler( this.props.mood );
+						this.props.history.push("/diary/" + this.props.date);
+				}
+			})
+			.catch( error => {
+				console.log("Couldn't check diary has been written because of ↓")
+				console.error(error);
+			})
 	}
 
 	render() {
