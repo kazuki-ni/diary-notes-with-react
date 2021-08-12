@@ -90,14 +90,18 @@ class Diary extends Component {
 		console.log("get to fetchSingleDiary function")
 		await fetchSingleDiary( this.date_num.join("_") )
 			.then( diary => {
-				Object.keys(diary).map( key => (
-					console.log(`\t${key}: ${diary[key]}`)
-				))
-				this.mood 		= diary.mood;
-				this.bg 			= diary.bg;
-				this.imgList 	= diary.imgs;
-				this.title 		= diary.title;
-				this.content = diary.content
+				if ( diary === null ) {
+					console.log("Diary is ", null);
+				} else {
+					Object.keys(diary).map( key => (
+						console.log(`\t${key}: ${diary[key]}`)
+					));
+					this.mood 		= diary.mood;
+					this.bg 			= diary.bg;
+					this.imgList 	= diary.imgs;
+					this.title 		= diary.title;
+					this.content = diary.content
+				}
 			})
 			.catch( error => console.error(error) )
 		inputDiaryFromDB({

@@ -21,5 +21,7 @@ const connectMongo = async () => {
   return mongoose;
 }
 
-// export default connectMongo;
-connectMongo();
+export default connectMongo;
+
+//* debug
+// connectMongo().then( mongoose => mongoose.connection.close() );

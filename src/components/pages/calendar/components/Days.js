@@ -16,25 +16,9 @@ export const Days = (props) => {
 
 	return (
 		days.map( day => {
-			let mood_class;
-			switch (moods[String(day)]) {
-				case "Rad":
-					mood_class = "rad-day";
-					break;
-				case "Happy":
-					mood_class = "happy-day";
-					break;
-				case "Normal":
-					mood_class = "normal-day";
-					break;
-				case "Sad":
-					mood_class = "sad-day";
-					break;
-				case "Angry":
-					mood_class = "angry-day";
-					break;
-				default:
-					mood_class = "not-yet-day";
+			let mood_class = "";
+			if (Object.keys(moods).includes(String(day))) {
+				mood_class = moods[String(day)].toLowerCase() + "-day";
 			}
 
 			return (

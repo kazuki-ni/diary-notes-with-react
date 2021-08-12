@@ -3,11 +3,13 @@ import express from 'express';
 
 const router = express.Router();
 
+//* insertDiary
 router.post('/input', (req, res) => {
   insertDiary(req.body)
   res.send("Input Diary")
 });
 
+//* findDiary
 router.get('/:date', async (req, res) => {
   const date = req.params.date;
   console.log("Come to server");
@@ -23,21 +25,24 @@ router.get('/:date', async (req, res) => {
   res.send(diary);
 });
 
-router.get('/fetch/mood/:year&:month', async (req, res) => {
+//* gatherMoods
+router.get('/mood/:year&:month', async (req, res) => {
   const year = req.params.year;
   const month = req.params.month;
   console.log("Come to server");
 
-  let gatherSuccessfully = true;
-  const diary = await gatherMoods(year, month)
-    .catch( error => {
-      gatherSuccessfully = false;
-      console.error(error);
-      return {};
-    })
-  console.log("findDiary: " + gatherSuccessfully);
+  console.log(year, month);
 
-  res.send(diary);
+  // let gatherSuccessfully = true;
+  // const diary = await gatherMoods(year, month)
+  //   .catch( error => {
+  //     gatherSuccessfully = false;
+  //     console.error(error);
+  //     return {};
+  //   })
+  // console.log("findDiary: " + gatherSuccessfully);
+
+  // res.send(diary);
 });
 
 export default router;

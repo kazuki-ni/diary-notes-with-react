@@ -23,29 +23,22 @@ const inputDiary = (params) => {
 //* date => diary
 const fetchSingleDiary = async (date) => {
   console.log("Go check if DB has a diary of "+ date)
-  const empty_diary = {
-    mood 		: "",
-    bg 			: "",
-    imgList : "",
-    title 	: "",
-    content : ""
-  }
 
-  const diary = await axios.get( HOST + '/api/diary/' + date)
-    //* Success
-    .then( res => {
-      console.log("Fetched diary from DB successfully");
-      const result = (res.data === {}) ? empty_diary : res.data;
-      return result; // => diary
-    })
-    //* Failure
-    .catch( error => {
-      console.warn("Failed to fetch diary from DB");
-      console.error(error);
-      return empty_diary; // => diary
-    } )
+  return (
+    await axios.get( HOST + '/api/diary/' + date)
 
-  return diary;
+      .then( res => {
+        console.log("Fetched diary from DB successfully");
+        const result = res.data || null;
+        return result; // => diary
+      })
+
+      .catch( error => {
+        console.warn("Failed to fetch diary from DB");
+        console.error(error);
+        return null; // => diary
+      } )
+  )
 }
 
 const fetchMoods = (year, month) => {
@@ -53,7 +46,7 @@ const fetchMoods = (year, month) => {
   console.log("Year: ", year);
   console.log("Month: ", month);
 
-  // const moods = await axios.get( HOST + '/api/diary/fetch/mood/', {
+  // const moods = await axios.get( HOST + '/api/diary/mood/', {
   //   year : year,
   //   month: month
   // })

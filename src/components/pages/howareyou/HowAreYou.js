@@ -17,7 +17,7 @@ class HowAreYou extends Component {
 	diaryHasBeenWritten = async() => {
 		const diary = await fetchSingleDiary(this.props.date)
 		// console.log(diary);
-		if (diary.date !== undefined) {
+		if (diary !== null) {
 			this.props.moodHandler(diary.mood);
 			return true
 		}
