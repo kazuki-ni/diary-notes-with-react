@@ -14,7 +14,7 @@ class HowAreYou extends Component {
 	}
 
 	checkDiaryHasBeenWritten = async () => {
-		console.log("get to fetchSingleDiary function")
+		console.log("Get to fetchSingleDiary function")
 		await fetchSingleDiary( this.props.date )
 			.then( diary => {
 				console.info(diary)
@@ -29,7 +29,7 @@ class HowAreYou extends Component {
 				}
 			})
 			.catch( error => {
-				console.log("Couldn't check diary has been written because of ↓")
+				console.log("Couldn't check if diary has been written because of ↓")
 				console.error(error);
 			})
 	}

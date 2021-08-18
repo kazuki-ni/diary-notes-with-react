@@ -31,7 +31,7 @@ router.get('/mood/:year&:month', async (req, res) => {
   const month = req.params.month;
   console.log("Come to server");
 
-  console.log(year, month);
+  console.info(year, month);
 
   // let gatherSuccessfully = true;
   // const diary = await gatherMoods(year, month)

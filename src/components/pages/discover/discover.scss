@@ -1,0 +1,190 @@
+$sizes: lg, sm;
+
+$breakpoint-up: (
+  'lg': 'screen and (min-width: 1280px)',
+) !default;
+
+//mixinを定義（初期値はlg）
+@mixin mq-up($breakpoint: lg) {
+  @media #{map-get($breakpoint-up, $breakpoint)} {
+    @content;
+  }
+}
+
+$bg-margin: 20px;
+$duration-time: .2s;
+
+.discover-root{
+  height: 100vh;
+  padding: 0 $bg-margin;
+
+  .discover-content{
+    display: grid;
+    grid-template-columns: 1fr;
+    justify-items: center;
+
+    @include mq-up("lg") {
+      grid-template-columns: 1000px 1fr;
+    }
+
+    ul.mini-article-list{
+      width: 100%;
+      max-width: 800px;
+      // @include mq-up("lg") {
+      // }
+
+      li.mini-article{
+        display: flex;
+        flex-direction: column;
+        list-style: none;
+        width: 100%;
+        border-bottom: 1px solid rgb(179, 179, 179);
+        border-right: 1px solid rgb(179, 179, 179);
+        border-left: 1px solid rgb(179, 179, 179);
+        &:first-child{
+          border-top: 1px solid rgb(179, 179, 179);
+        }
+        &:hover{
+          background-color: rgba(0, 0, 0, .02);
+        }
+        section.mini-header{
+          margin-left: 10px;
+          height: 50px;
+          display: grid;
+          grid-template-columns: 50px 1fr;
+          a {
+            height: inherit;
+            margin: 2.5px 0;
+            img.mini-author-icon{
+              height: 45px;
+              width: 45px;
+              object-fit: cover;
+              border-radius: 45px;
+              margin: auto 0;
+              transition-duration: $duration-time;
+              &:hover{
+                background-color: black;
+                opacity: 0.6;
+              }
+            }
+          }
+          .mini-header-right{
+            height: inherit;
+            user-select: none;
+            display: flex;
+            flex-direction: column;
+            margin-left: 10px;
+            .mini-title{
+              height: 40px;
+              font-size: 20px;
+              line-height: 40px;
+            }
+            a.mini-author-name{
+              height: 8px;
+              font-size: 12px;
+              line-height: 8px;
+              user-select: none;
+              margin: auto 0;
+              color: black;
+              transform: translateY(-5px);
+              text-decoration: none;
+              transition-duration: $duration-time;
+              &:hover{
+                text-decoration: underline;
+              }
+            }
+          }
+        }
+
+        section.mini-content{
+          user-select: none;
+          margin-top: 5px;
+          width: 100%;
+          img.mini-img{
+            width: inherit;
+            object-fit: cover;
+          }
+        }
+
+        section.mini-footer{
+          height: 20px;
+          margin: 10px 0 15px;
+          display: grid;
+          grid-template-columns: repeat(4, 1fr);
+          align-items: start;
+          justify-items: start;
+          div {
+            height: inherit;
+            i{
+              height: 30px;
+              width: 30px;
+              color: gray;
+              font-size: 15px;
+              text-align: center;
+              line-height: 30px;
+              border-radius: 30px;
+              transition-duration: .2s;
+            }
+            span{
+              height: inherit;
+              color: gray;
+              font-size: 12px;
+              margin-left: 10px;
+              text-align: center;
+              line-height: 20px;
+              transition-duration: $duration-time;
+            }
+            &:nth-child(1):hover{
+              i{
+                color: #64C9CF;
+                background-color: rgba(100, 201, 207, .1);
+              }
+              span{
+                color: #64C9CF;
+              }
+            }
+            &:nth-child(2):hover{
+              i{
+                color: #50CB93;
+                background-color: rgba(80, 203, 147, .1);
+              }
+              span{
+                color: #50CB93;
+              }
+            }
+            &:nth-child(3):hover{
+              i{
+                color: #fa5656;
+                background-color: rgba(255, 107, 107, .1);
+              }
+              span{
+                color: #fa5656;
+              }
+            }
+            &:nth-child(4):hover{
+              i{
+                color: #F5CC71;
+                background-color: rgba(245, 204, 113, .1);
+              }
+              span{
+                color: #F5CC71;
+              }
+            }
+          }
+        }
+      }
+    }
+
+    .search{
+      display: none;
+      width: 600px;
+      height: 800px;
+      border: 1px solid black;
+      background-color: rgba(0, 0, 0, .2);
+      @include mq-up("lg") {
+        display: block;
+      }
+    }
+  }
+
+}

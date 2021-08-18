@@ -8,7 +8,7 @@ import HowAreYou from "./components/pages/howareyou/HowAreYou";
 import Dashboard from "./components/pages/Dashboard"
 import Calendar from "./components/pages/calendar/Calendar"
 import Diary from "./components/pages/diary/Diary"
-import Discover from "./components/pages/Discover"
+import Discover from "./components/pages/discover/Discover"
 import Account from "./components/pages/Account"
 import Liked from "./components/pages/Liked"
 import Bookmark from "./components/pages/Bookmark"
