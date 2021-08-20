@@ -1,48 +1,57 @@
 import axios from 'axios'
+import {
+  // DIARY_ACTIVATE_IMAGE,
+  // DIARY_DEACTIVATE_IMAGE,
+  // DIARY_SET_DATE,
+  // DIARY_SET_MOOD,
+  // DIARY_SET_CONTENT,
+  DIARY_FETCH_REQUEST,
+  DIARY_FETCH_FAIL,
+  DIARY_FETCH_SUCCESS,
+  DIARY_INPUT_REQUEST,
+  DIARY_INPUT_FAIL,
+  DIARY_INPUT_SUCCESS
+} from "src/constants/diaryConstants";
 
 const HOST = "http://localhost:9000"
 
 //* diary => ()
-const inputDiary = (params) => {
+export const inputDiary = diary => async dispatch => {
 
-  console.log(params)
-  console.log("is to be input")
+  console.log(diary)
+  console.log("is to be inputted")
 
-  axios
-    .post( HOST + '/api/diary/input', params)
-    .then( res => {
-      console.log(res.data);
-      // this.props.history.push('/');
-    })
-    .catch( error => {
-      alert("Failed to input diary to DB");
-      console.warn(error);
-  })
+  try {
+    dispatch({type: DIARY_INPUT_REQUEST});
+    const res = await axios.post( HOST + '/api/diary/input', diary);
+    dispatch({type: DIARY_INPUT_SUCCESS});
+    console.log(res.data);
+    this.props.history.push('/');
+  } catch (err) {
+    alert("Failed to input diary to DB");
+    dispatch({type: DIARY_INPUT_FAIL, payload: err});
+  }
 }
 
 //* date => diary
-const fetchSingleDiary = async (date) => {
+export const fetchSingleDiary = date => async dispatch => {
   console.log("Go check if DB has a diary of "+ date)
 
-  return (
-    await axios.get( HOST + '/api/diary/' + date)
-
-      .then( res => {
-        console.log("Fetched diary from DB successfully");
-        const result = res.data || null;
-        return result; // => diary
-      })
-
-      .catch( error => {
-        console.warn("Failed to fetch diary from DB");
-        console.error(error);
-        return null; // => diary
-      } )
-  )
+  dispatch({type: DIARY_FETCH_REQUEST});
+  await axios.get( HOST + '/api/diary/' + date)
+    .then( res => {
+      dispatch({type: DIARY_FETCH_SUCCESS, payload: res.data});
+      console.log("Fetched diary from DB successfully");
+      // const result = res.data || null;
+    })
+    .catch( err => {
+      console.warn("Failed to fetch diary from DB");
+      dispatch({type: DIARY_FETCH_FAIL, payload: err});
+    })
 }
 
-const fetchMoods = (year, month) => {
-  console.log("Go fetch moods the following month ↓");
+export const fetchMoods = (year, month) => {
+  console.log("Go fetch moods of the following month ↓");
   console.log("Year: ", year);
   console.log("Month: ", month);
 
@@ -57,9 +66,9 @@ const fetchMoods = (year, month) => {
   //     return result; // => moods
   //   })
   //   //* Failure
-  //   .catch( error => {
+  //   .catch( err => {
   //     console.warn("Failed to fetch moods from DB");
-  //     console.error(error);
+  //     console.error(err);
   //     return {}; // => moods
   //   } )
   const moods = {
@@ -73,5 +82,3 @@ const fetchMoods = (year, month) => {
 
   return moods;
 }
-
-export {inputDiary, fetchSingleDiary, fetchMoods};

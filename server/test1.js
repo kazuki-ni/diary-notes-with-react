@@ -1,12 +1,11 @@
-const a = {
-  '2': 'normal',
-  '3': 'rad',
-  '4': 'rad',
-  '5': 'happy',
-  '6': 'sad'
+const dict = {
+  a: 1,
+  b: 2,
+  c: 3
 }
 
-for (let i = 0; i < 10; i++) {
-  console.log(a[String(i)]);
-  // console.log(i);
-}
+const { c, a, d } = dict
+
+console.log(a)
+console.log(d)
+console.log(c)

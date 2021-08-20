@@ -1,28 +1,42 @@
+import React from "react";
+import { useSelector, useDispatch } from "react-redux";
+
+import {
+  setAll,
+  activateYearSelector,
+  activateMonthSelector,
+} from "src/actions/calendarActions";
+
 import { months } from "../calendarVariables";
 
-export const CalendarHeader = (props) => {
+export default function CalendarHeader() {
+  //* State
+  const year = useSelector( state => state.calendarDateReducer.year );
+  const month = useSelector( state => state.calendarDateReducer.month );
 
-	const decreaseMonth = () => {
-		props.setMonth(props.month - 1)
-	}
-	const increaseMonth = () => {
-		props.setMonth(props.month + 1)
-	}
+  //* Dispatch
+  const dispatch = useDispatch();
+  const changeMonth = newMonth => dispatch(setAll(new Date(year, newMonth, 1)));
+	const yearHandler = () => dispatch(activateYearSelector());
+  const monthHandler = () => dispatch(activateMonthSelector());
+
+	const decreaseMonth = () => changeMonth(month - 1);
+	const increaseMonth = () => changeMonth(month + 1);
 
 	return (
 		<div className="header">
 			<div className="header--info">
 				<span
 					className="header--month"
-					onClick={props.monthHandler}
+					onClick={monthHandler}
 				>
-					{months[props.month]}
+					{months[month]}
 				</span>
 				<span
 					className="header--year"
-					onClick={props.yearHandler}
+					onClick={yearHandler}
 				>
-					{props.year}
+					{year}
 				</span>
 			</div>
 			<div className="header-icons">

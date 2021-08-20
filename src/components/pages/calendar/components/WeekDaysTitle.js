@@ -1,6 +1,6 @@
 import { weekdays } from "../calendarVariables";
 
-export const WeekDaysTitle = () => {
+export default function WeekDaysTitle() {
 	return (
 		<div className="weekrow">
 			{weekdays.map( weekday => {

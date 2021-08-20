@@ -1,11 +1,12 @@
-$sizes: lg, sm;
+$sizes: lg, md, sm;
 
 $breakpoint-up: (
   'lg': 'screen and (min-width: 1280px)',
+  'md': 'screen and (min-width: 1024px)',
 ) !default;
 
-//mixinを定義（初期値はlg）
-@mixin mq-up($breakpoint: lg) {
+//mixinを定義（初期値はmd）
+@mixin mq-up($breakpoint: md) {
   @media #{map-get($breakpoint-up, $breakpoint)} {
     @content;
   }
@@ -23,13 +24,19 @@ $duration-time: .2s;
     grid-template-columns: 1fr;
     justify-items: center;
 
+    // @include mq-up("md") {
+    //   grid-template-columns: 900px 1fr;
+    //   justify-items: center;
+    // }
     @include mq-up("lg") {
       grid-template-columns: 1000px 1fr;
+      justify-items: center;
     }
 
     ul.mini-article-list{
       width: 100%;
       max-width: 800px;
+      transition-duration: 1s;
       // @include mq-up("lg") {
       // }
 
@@ -48,19 +55,19 @@ $duration-time: .2s;
           background-color: rgba(0, 0, 0, .02);
         }
         section.mini-header{
-          margin-left: 10px;
+          margin: 5px 0 5px 10px;
           height: 50px;
           display: grid;
           grid-template-columns: 50px 1fr;
           a {
-            height: inherit;
-            margin: 2.5px 0;
+            width: 45px;
+            height: 45px;
+            margin: 2.5px;
             img.mini-author-icon{
               height: 45px;
               width: 45px;
               object-fit: cover;
               border-radius: 45px;
-              margin: auto 0;
               transition-duration: $duration-time;
               &:hover{
                 background-color: black;
@@ -98,21 +105,24 @@ $duration-time: .2s;
 
         section.mini-content{
           user-select: none;
-          margin-top: 5px;
           width: 100%;
           img.mini-img{
             width: inherit;
             object-fit: cover;
           }
+          p.mini-sentence{
+            margin-left: 10px;
+          }
         }
 
         section.mini-footer{
           height: 20px;
-          margin: 10px 0 15px;
+          margin: 10px 0 15px 20px;
           display: grid;
           grid-template-columns: repeat(4, 1fr);
           align-items: start;
           justify-items: start;
+          // border-top: 1px solid rgb(179, 179, 179);
           div {
             height: inherit;
             i{
@@ -120,7 +130,6 @@ $duration-time: .2s;
               width: 30px;
               color: gray;
               font-size: 15px;
-              text-align: center;
               line-height: 30px;
               border-radius: 30px;
               transition-duration: .2s;
@@ -181,8 +190,10 @@ $duration-time: .2s;
       height: 800px;
       border: 1px solid black;
       background-color: rgba(0, 0, 0, .2);
+      min-width: 200px;
       @include mq-up("lg") {
         display: block;
+        width: 70%;
       }
     }
   }

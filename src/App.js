@@ -26,58 +26,16 @@ class App extends Component {
   console.log(this.state)
   }
 
-  moodHandler = (mood) => {
-    console.log("Mood: " + mood)
-    this.setState({ mood: mood })
-  }
-
-  dateChanged = (date) => {
-    console.log("Date Changed to " + date)
-    this.setState({ date: date })
-  }
-
   render() {
     return (
     <div className="App">
       <Route exact path="/" component={Dashboard} />
-      <Route
-        path="/howareyou"
-        render={ () =>
-          <HowAreYou
-            moodHandler={this.moodHandler}
-            date={this.state.date}
-          />
-        }
-      />
+      <Route path="/howareyou" component={HowAreYou} />
 
       {/* For when directly come to this page by url*/}
-      <Route
-        exact path="/diary"
-        render={ () =>
-          <Diary
-            date={this.state.date}
-            mood={this.state.mood}
-          />
-        }
-      />
-      <Route
-        path="/diary/:date"
-        render={ () =>
-          <Diary
-            date={this.state.date}
-            mood={this.state.mood}
-          />
-        }
-      />
-      <Route
-        path="/calendar"
-        render={ () =>
-          <Calendar
-            dateChanged={this.dateChanged}
-          />
-        }
-      />
-
+      <Route exact path="/diary" component={Diary} />
+      <Route path="/diary/:date" component={Diary} />
+      <Route path="/calendar" component={Calendar} />
       <Route path="/discover" component={Discover} />
       <Route path="/account" component={Account} />
       <Route path="/liked" component={Liked} />

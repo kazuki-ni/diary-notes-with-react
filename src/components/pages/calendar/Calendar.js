@@ -1,134 +1,57 @@
-import React, { Component } from "react";
+import React from "react";
 import { withRouter } from "react-router";
+import { useSelector } from "react-redux";
 
 import "./calendar.scss";
-import { CalendarHeader } from "./components/CalendarHeader";
-import { WeekDaysTitle } from "./components/WeekDaysTitle";
-import { Days } from "./components/Days";
-import { MonthSelector } from "./components/MonthSelector";
-import { YearSelector } from "./components/YearSelector";
+import CalendarHeader from "./components/CalendarHeader";
+import WeekDaysTitle from "./components/WeekDaysTitle";
+import Days from "./components/Days";
+import MonthSelector from "./components/MonthSelector";
+import YearSelector from "./components/YearSelector";
 
-class Calendar extends Component {
+function Calendar() {
+  //* State
+  const year = useSelector( state => state.calendarDateReducer.year );
+  const month = useSelector( state => state.calendarDateReducer.month );
+  const date = useSelector( state => state.calendarDateReducer.date );
+  console.log(date, year, month+1)
+  const displayMonthSelector = useSelector( state => state.calendarSelectorReducer.displayMonthSelector )
+  const displayYearSelector = useSelector( state => state.calendarSelectorReducer.displayYearSelector )
 
-  constructor(props) {
-    super(props);
+  return (
+    <div className="container">
 
-    const now = new Date();
-    const date = new Date(now.getFullYear(), now.getMonth(), 1);
-    this.state = {
-      year: date.getFullYear(),
-      month: date.getMonth(),
-      date: date,
-      displayMonthSelector: false,
-      displayYearSelector: false
-    }
-
-  }
-
-  setMonth = (newMonth) => {
-    this.setState( () => {
-      const newDate = new Date(this.state.year, newMonth, 1);
-      console.log(newDate);
-      return {
-        year: newDate.getFullYear(),
-        month: newDate.getMonth(),
-        date: newDate
-      };
-    });
-  };
-
-  yearClicked = (year) => {
-    this.setState(
-      () => ({ displayYearSelector: false }),
-      () => this.setState( {year: year} )
-    );
-  }
-
-  monthClicked = (month) => {
-    this.setState(
-      () => ({ displayMonthSelector: false }),
-      () => this.setMonth(month)
-    );
-  }
-
-  dayClicked = (day) => {
-    const date =
-      this.state.year+
-      "_"+
-      ( '00' + (this.state.month+1) ).slice( -2 )+
-      ( '00' + day ).slice( -2 )
-
-    this.props.dateChanged(date)
-    this.props.history.push('/howareyou')
-  }
-
-  yearHandler = () => {
-    this.setState( () => ({
-      displayYearSelector: true
-    }))
-  }
-
-  monthHandler = () => {
-    this.setState( () => ({
-      displayMonthSelector: true
-    }))
-  }
-
-  render() {
-    return (
-      <div className="container">
-        <div className="calendar">
-
-          {(
-            !this.state.displayMonthSelector &&
-            !this.state.displayYearSelector) && (
-              <CalendarHeader
-                year={this.state.year}
-                month={this.state.month}
-                setMonth={this.setMonth}
-                yearHandler={this.yearHandler}
-                monthHandler={this.monthHandler}
-              />
-          )}
-
-          {(
-            !this.state.displayMonthSelector &&
-            !this.state.displayYearSelector) && (
-              <WeekDaysTitle />
-          )}
-
-          {(
-            !this.state.displayMonthSelector &&
-            !this.state.displayYearSelector) && (
-              <Days
-                month={this.state.month}
-                date={this.state.date}
-                dayClicked={this.dayClicked}
-              />
-          )}
-
-        </div>
-
-        {this.state.displayMonthSelector && (
-          <MonthSelector
-            month={this.state.month}
-            monthClicked={this.monthClicked}
-          />
+      <div className="calendar">
+        {(
+          !displayMonthSelector &&
+          !displayYearSelector) && (
+            <CalendarHeader />
         )}
-
-        {this.state.displayYearSelector && (
-          <YearSelector
-            year={this.state.year}
-            yearClicked={this.yearClicked}
-          />
+        {(
+          !displayMonthSelector &&
+          !displayYearSelector) && (
+            <WeekDaysTitle />
         )}
-
-        <div className="dummy-box"></div>
-
+        {(
+          !displayMonthSelector &&
+          !displayYearSelector) && (
+            <Days />
+        )}
       </div>
 
-    )
-  }
+      {displayMonthSelector && (
+        <MonthSelector />
+      )}
+
+      {displayYearSelector && (
+        <YearSelector />
+      )}
+
+      <div className="dummy-box"></div>
+
+    </div>
+
+  )
 }
 
 export default withRouter(Calendar);

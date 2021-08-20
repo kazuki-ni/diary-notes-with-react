@@ -15,13 +15,6 @@ const toggleImageFunc = (bool) => {
   }
 }
 
-const inputDiaryFromDB = (diary) => {
-  document.getElementById("diary-root").style.backgroundImage = diary.bg;
-  document.getElementById("diary-title").value = diary.title;
-  document.getElementById("diary-content").value = diary.content;
-  console.log("Input diary because DB has a diary on " + diary.date);
-}
-
 const setDiaryImage =  (bool = true ) => {
   if (!bool) {return}
 
@@ -65,5 +58,10 @@ const gatherImgURLs = () => {
   return urls;
 }
 
+const showURLofImgs = (newImgList) => {
+  console.log("These images are to be inputted with diary:");
+  newImgList.map((url, i)=>console.log(`${i+1}: ${url.slice(0, 30)}`))
+};
 
-export { toggleImageFunc, inputDiaryFromDB, setDiaryImage, gatherImgURLs };
+
+export { toggleImageFunc, setDiaryImage, gatherImgURLs, showURLofImgs };

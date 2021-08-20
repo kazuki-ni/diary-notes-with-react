@@ -7,7 +7,7 @@ const diarySchema = new mongoose.Schema({
   timestamp : { type: String, required: true },
   mood      : { type: String, required: true },
   bg        : { type: String},
-  imgs      : { type: [String]},
+  imgList   : { type: [String]},
   title     : { type: String, required: true },
   content   : { type: String}
 });

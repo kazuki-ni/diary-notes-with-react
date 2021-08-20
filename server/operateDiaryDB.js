@@ -11,7 +11,7 @@ async function insertDiary(diary) {
     timestamp : new Date().toUTCString(),
     mood      : diary.mood,
     bg        : diary.bg,
-    imgs      : diary.imgs,
+    imgList   : diary.imgs,
     title     : diary.title,
     content   : diary.content
   }

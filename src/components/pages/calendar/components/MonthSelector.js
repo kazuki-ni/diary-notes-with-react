@@ -1,18 +1,34 @@
+import { useSelector, useDispatch } from "react-redux";
 import { months } from "../calendarVariables";
 
-export const MonthSelector = (props) => {
+import {
+  setMonth,
+  deactivateMonthSelector,
+} from "src/actions/calendarActions";
+
+export default function MonthSelector() {
+	//* State
+  const month = useSelector( state => state.calendarDateReducer.month );
+
+	//* Dispatch
+	const dispatch = useDispatch();
+	const monthClicked = month => {
+    dispatch(setMonth(month));
+    dispatch(deactivateMonthSelector());
+  }
+
 	return (
 		<div className="selector">
-			{months.map((month, i) => {
+			{months.map((monthName, i) => {
 				return (
 					<span
-						key={month}
-						onClick={() => props.monthClicked(i)}
+						key={monthName}
+						onClick={() => monthClicked(i)}
 						className={`selectable ${
-							i === props.month ? "selected" : ""
+							i === month ? "selected" : ""
 						}`}
 					>
-						{month}
+						{monthName}
 					</span>
 				);
 			})}

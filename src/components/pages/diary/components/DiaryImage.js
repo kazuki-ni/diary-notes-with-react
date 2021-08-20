@@ -11,7 +11,7 @@ export const DiaryImage = (props) => {
     console.log(files)
     addLi(files)
     props.setDiaryImage();
-    // props.addURLofImgs(gatherImgURLs());
+    // props.showURLofImgs(gatherImgURLs());
   }
 
   return (

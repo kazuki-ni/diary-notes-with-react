@@ -14,7 +14,7 @@ const MiniArticle = () => {
     },
     {
       id: 2,
-      title: "Vtuber一可愛いのは誰だ？",
+      title: "研究室いきました",
       author_name: "Pekora",
       author_icon: "/images/profile.jpg",
       author_link: "Pekora",
@@ -23,7 +23,7 @@ const MiniArticle = () => {
     },
     {
       id: 3,
-      title: "Vtuber一可愛いのは誰だ？",
+      title: "研究室いきました",
       author_name: "Pekora",
       author_icon: "/images/profile.jpg",
       author_link: "Pekora",
