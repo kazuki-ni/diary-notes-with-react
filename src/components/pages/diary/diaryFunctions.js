@@ -1,11 +1,11 @@
-const toggleImageFunc = (bool) => {
-  switch (bool) {
-    case true:
+const toggleImageFunc = (action) => {
+  switch (action) {
+    case "OPEN":
       document.getElementById("diary").classList.replace("diary-without-img", "diary");
       document.getElementById("diary-title").classList.replace("diary-title-without-img", "diary-title");
       document.getElementById("diary-content").classList.replace("diary-content-without-img", "diary-content");
       break;
-    case false:
+    case "CLOSE":
       document.getElementById("diary").classList.replace("diary", "diary-without-img");
       document.getElementById("diary-title").classList.replace("diary-title", "diary-title-without-img");
       document.getElementById("diary-content").classList.replace("diary-content", "diary-content-without-img");
@@ -52,7 +52,7 @@ const gatherImgURLs = () => {
     try {
       urls.push(elem.getElementsByTagName("img")[0].src);
     } catch {
-      console.log("No URL because of add button");
+      console.log("No images have not yet been uploaded");
     }
   })
   return urls;
@@ -62,6 +62,5 @@ const showURLofImgs = (newImgList) => {
   console.log("These images are to be inputted with diary:");
   newImgList.map((url, i)=>console.log(`${i+1}: ${url.slice(0, 30)}`))
 };
-
 
 export { toggleImageFunc, setDiaryImage, gatherImgURLs, showURLofImgs };

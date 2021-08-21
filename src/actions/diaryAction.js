@@ -1,7 +1,7 @@
 // import axios from 'axios'
 import {
-  // DIARY_ACTIVATE_IMAGE,
-  // DIARY_DEACTIVATE_IMAGE,
+  DIARY_ACTIVATE_IMAGE,
+  DIARY_DEACTIVATE_IMAGE,
   DIARY_SET_DATE,
   DIARY_SET_ALL,
   DIARY_FETCH_REQUEST,
@@ -35,5 +35,17 @@ export function setDiaryAll(diary) {
   return {
     type: DIARY_SET_ALL,
     payload: diary
+  }
+}
+
+export function activateImageFunc() {
+  return {
+    type: DIARY_ACTIVATE_IMAGE
+  }
+}
+
+export function deactivateImageFunc() {
+  return {
+    type: DIARY_DEACTIVATE_IMAGE
   }
 }

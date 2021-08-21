@@ -5,14 +5,14 @@ import './App.css';
 
 import HowAreYou from "./components/pages/howareyou/HowAreYou";
 
-import Dashboard from "./components/pages/Dashboard"
+import Dashboard from "./components/pages/dashboard/Dashboard"
 import Calendar from "./components/pages/calendar/Calendar"
 import Diary from "./components/pages/diary/Diary"
 import Discover from "./components/pages/discover/Discover"
-import Account from "./components/pages/Account"
-import Liked from "./components/pages/Liked"
-import Bookmark from "./components/pages/Bookmark"
-import Setting from "./components/pages/Setting"
+import Account from "./components/pages/account/Account"
+import Liked from "./components/pages/liked/Liked"
+import Bookmark from "./components/pages/bookmark/Bookmark"
+import Setting from "./components/pages/setting/Setting"
 
 import { today_date } from "src/components/pages/calendar/calendarVariables";
 

@@ -59,11 +59,10 @@ function diaryInitiallySetReducer(state={
         }
       };
     case DIARY_SET_ALL:
-      console.log(action.payload)
       return {
         ...state,
         diary: {
-          ...state,
+          ...state.diary,
           date    : action.payload.date,
           mood    : action.payload.mood,
           bg      : action.payload.bg,

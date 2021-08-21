@@ -1,8 +1,15 @@
+import React from 'react'
+import { useSelector } from 'react-redux';
+
 import { addLi } from "../convertToBase64";
+import {
+  setDiaryImage,
+  // showURLofImgs
+} from '../diaryFunctions';
 
-export const DiaryImage = (props) => {
-
-  const imgList = props.imgList;
+export default function DiaryImage() {
+	//* State
+	const { imgList } = useSelector( state => state.diaryInitiallySetReducer.diary );
 
   //* files => ()
   const previewImgs = () => {
@@ -10,8 +17,8 @@ export const DiaryImage = (props) => {
     const files = imgFileField.files;
     console.log(files)
     addLi(files)
-    props.setDiaryImage();
-    // props.showURLofImgs(gatherImgURLs());
+    setDiaryImage();
+    // showURLofImgs(gatherImgURLs());
   }
 
   return (
