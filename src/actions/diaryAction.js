@@ -2,8 +2,8 @@
 import {
   // DIARY_ACTIVATE_IMAGE,
   // DIARY_DEACTIVATE_IMAGE,
-  // DIARY_SET_DATE,
-  DIARY_SET_DIARY,
+  DIARY_SET_DATE,
+  DIARY_SET_ALL,
   DIARY_FETCH_REQUEST,
   // DIARY_FETCH_FAIL,
   DIARY_FETCH_SUCCESS,
@@ -24,9 +24,16 @@ export function fetchFinish() {
   }
 }
 
-export function setDiary(diary) {
+export function setDiaryDate(date) {
   return {
-    type: DIARY_SET_DIARY,
+    type: DIARY_SET_DATE,
+    payload: date
+  }
+}
+
+export function setDiaryAll(diary) {
+  return {
+    type: DIARY_SET_ALL,
     payload: diary
   }
 }

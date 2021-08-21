@@ -3,33 +3,14 @@ import {
   CALENDAR_ACTIVATE_YEAR_SELECTOR,
   CALENDAR_DEACTIVATE_MONTH_SELECTOR,
   CALENDAR_DEACTIVATE_YEAR_SELECTOR,
-  CALENDAR_SET_YEAR,
-  CALENDAR_SET_MONTH,
-  CALENDAR_SET_DATE,
-  CALENDAR_SET_ALL
+  CALENDAR_SET_DATE
 } from "src/constants/calendarConstants";
 
-const setYear = (year) => ({
-  type: CALENDAR_SET_YEAR,
-  payload: year
-})
-
-const setMonth = (month) => ({
-  type: CALENDAR_SET_MONTH,
-  payload: month
-})
-
-const setDate = (date) => ({
+const setDate = (year, month) => ({
   type: CALENDAR_SET_DATE,
-  payload: date
-})
-
-const setAll = (newDate) => ({
-  type: CALENDAR_SET_ALL,
   payload: {
-    year: newDate.getFullYear(),
-    month: newDate.getMonth(),
-    date: newDate
+    year: year,
+    month: month
   }
 })
 
@@ -50,10 +31,7 @@ const deactivateMonthSelector = () => ({
 })
 
 export {
-  setYear,
-  setMonth,
   setDate,
-  setAll,
   activateYearSelector,
   activateMonthSelector,
   deactivateYearSelector,

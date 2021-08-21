@@ -2,7 +2,7 @@ import {
   DIARY_ACTIVATE_IMAGE,
   DIARY_DEACTIVATE_IMAGE,
   DIARY_SET_DATE,
-  DIARY_SET_DIARY,
+  DIARY_SET_ALL,
   DIARY_FETCH_REQUEST,
   DIARY_FETCH_FAIL,
   DIARY_FETCH_SUCCESS,
@@ -58,7 +58,7 @@ function diaryInitiallySetReducer(state={
           date: action.payload
         }
       };
-    case DIARY_SET_DIARY:
+    case DIARY_SET_ALL:
       console.log(action.payload)
       return {
         ...state,

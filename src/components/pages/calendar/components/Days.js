@@ -2,9 +2,9 @@ import React from 'react'
 import { useSelector, useDispatch } from "react-redux";
 import { useHistory } from 'react-router';
 
-import { setDate } from "src/actions/calendarActions";
+import { setDiaryDate } from 'src/actions/diaryAction';
 
-import { firstDayOfMonth, holiday_list, days_list } from "../calendarVariables";
+import { checkToday, getHolidays, getDaysInMonth } from '../calendarFunctions';
 import { fetchMoods } from "src/actions/diaryActions";
 
 export default function Days() {
@@ -13,30 +13,26 @@ export default function Days() {
 	//* State
   const year = useSelector( state => state.calendarDateReducer.year );
   const month = useSelector( state => state.calendarDateReducer.month );
-  const date = useSelector( state => state.calendarDateReducer.date );
+  const date = new Date(year, month, 1);
 
   //* Dispatch
   const dispatch = useDispatch();
   const dayClicked = (day) => {
-    const date =
+    const date_ =
       year + "_" +
       ('00' + (month+1)).slice(-2) +
       ('00' + day ).slice(-2);
 
-    dispatch(setDate(date))
+    dispatch(setDiaryDate(date_))
     history.push('/howareyou')
   }
 
-	const firstDay = firstDayOfMonth(date)+1;
-	const days = [...Array(days_list[month]).keys()].map(i => ++i)
-	const today_date = new Date();
-	const today = (
-		(date.getFullYear() === today_date.getFullYear()) &&
-		(date.getMonth() === today_date.getMonth())
-	) ? today_date.getDate() : "not today";
-	const holidays = holiday_list[month];
-	const style = {gridColumnStart: firstDay}
-	const moods = fetchMoods(year, month+1);
+	const firstDay = date.getDay() + 1;
+	const days = getDaysInMonth(year, month);
+	const today = checkToday(date);
+	const holidays = getHolidays(month);
+	const style = {gridColumnStart: firstDay};
+	const moods = fetchMoods(year, month);
 
 	return (
 		days.map( day => {

@@ -4,7 +4,7 @@ import { useHistory } from 'react-router'
 import { useDispatch, useSelector } from 'react-redux'
 
 // import { fetchSingleDiary } from '../../../actions/diaryActions'
-import { setDiary } from 'src/actions/diaryAction'
+import { setDiaryAll } from 'src/actions/diaryAction'
 import mood_imgs from "./moodImagePath"
 import "./howareyou.scss"
 import { today_date } from '../calendar/calendarVariables'
@@ -29,7 +29,7 @@ function HowAreYou() {
 	const moodHandler = mood => {
 		diary.mood = mood;
 		diary.date = date;
-		dispatch(setDiary(diary));
+		dispatch(setDiaryAll(diary));
 	}
 
 	return (

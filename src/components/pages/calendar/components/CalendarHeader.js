@@ -2,7 +2,7 @@ import React from "react";
 import { useSelector, useDispatch } from "react-redux";
 
 import {
-  setAll,
+  setDate,
   activateYearSelector,
   activateMonthSelector,
 } from "src/actions/calendarActions";
@@ -16,7 +16,7 @@ export default function CalendarHeader() {
 
   //* Dispatch
   const dispatch = useDispatch();
-  const changeMonth = newMonth => dispatch(setAll(new Date(year, newMonth, 1)));
+  const changeMonth = newMonth => dispatch(setDate(year, newMonth));
 	const yearHandler = () => dispatch(activateYearSelector());
   const monthHandler = () => dispatch(activateMonthSelector());
 

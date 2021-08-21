@@ -3,10 +3,7 @@ import {
   CALENDAR_ACTIVATE_YEAR_SELECTOR,
   CALENDAR_DEACTIVATE_MONTH_SELECTOR,
   CALENDAR_DEACTIVATE_YEAR_SELECTOR,
-  CALENDAR_SET_YEAR,
-  CALENDAR_SET_MONTH,
-  CALENDAR_SET_DATE,
-  CALENDAR_SET_ALL
+  CALENDAR_SET_DATE
 } from "src/constants/calendarConstants";
 
 function calendarSelectorReducer(state = {
@@ -40,32 +37,14 @@ function calendarSelectorReducer(state = {
 
 function calendarDateReducer(state = {
   year  : new Date().getFullYear(),
-  month : new Date().getMonth(),
-  date  : new Date(new Date().setDate(1))
+  month : new Date().getMonth()
 }, action) {
   switch (action.type) {
-    case CALENDAR_SET_YEAR:
-      return {
-        ...state,
-        year: action.payload
-      };
-    case CALENDAR_SET_MONTH:
-      console.log(action.payload)
-      return {
-        ...state,
-        month: action.payload
-      };
     case CALENDAR_SET_DATE:
       return {
         ...state,
-        date: action.payload
-      };
-    case CALENDAR_SET_ALL:
-      return {
-        ...state,
         year: action.payload.year,
-        month: action.payload.month,
-        date: action.payload.date
+        month: action.payload.month
       };
     default: return state;
   }

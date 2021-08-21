@@ -11,10 +11,6 @@ import YearSelector from "./components/YearSelector";
 
 function Calendar() {
   //* State
-  const year = useSelector( state => state.calendarDateReducer.year );
-  const month = useSelector( state => state.calendarDateReducer.month );
-  const date = useSelector( state => state.calendarDateReducer.date );
-  console.log(date, year, month+1)
   const displayMonthSelector = useSelector( state => state.calendarSelectorReducer.displayMonthSelector )
   const displayYearSelector = useSelector( state => state.calendarSelectorReducer.displayYearSelector )
 

@@ -13,6 +13,8 @@ import {
   DIARY_INPUT_SUCCESS
 } from "src/constants/diaryConstants";
 
+import { months } from 'src/components/pages/calendar/calendarVariables';
+
 const HOST = "http://localhost:9000"
 
 //* diary => ()
@@ -51,9 +53,7 @@ export const fetchSingleDiary = date => async dispatch => {
 }
 
 export const fetchMoods = (year, month) => {
-  console.log("Go fetch moods of the following month ↓");
-  console.log("Year: ", year);
-  console.log("Month: ", month);
+  console.log("Go fetch moods of", months[month], year);
 
   // const moods = await axios.get( HOST + '/api/diary/mood/', {
   //   year : year,
