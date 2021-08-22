@@ -1,25 +1,28 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { useSelector } from 'react-redux';
 
 import { addLi } from "../convertToBase64";
 import {
-  setDiaryImage,
+  layoutDiaryImage,
   // showURLofImgs
 } from '../diaryFunctions';
 
 export default function DiaryImage() {
 	//* State
-	const { imgList } = useSelector( state => state.diaryInitiallySetReducer.diary );
+	const { imgList } = useSelector( state => state.diaryReducer.diary );
 
   //* files => ()
   const previewImgs = () => {
     const imgFileField = document.getElementById("img-upload");
     const files = imgFileField.files;
-    console.log(files)
-    addLi(files)
-    setDiaryImage();
+    console.log(files);
+    addLi(files);
+    layoutDiaryImage();
     // showURLofImgs(gatherImgURLs());
   }
+
+  //* DidMount & DidUpdate
+  useEffect(() => layoutDiaryImage());
 
   return (
     <ul id="diary-img-list">

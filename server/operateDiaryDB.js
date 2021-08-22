@@ -11,7 +11,7 @@ async function insertDiary(diary) {
     timestamp : new Date().toUTCString(),
     mood      : diary.mood,
     bg        : diary.bg,
-    imgList   : diary.imgs,
+    imgList   : diary.imgList,
     title     : diary.title,
     content   : diary.content
   }
@@ -67,7 +67,6 @@ async function gatherMoods(year, month) {
         const diaries = await Diary.find( {
           year: year, month: month
         });
-        console.log(diaries);
         if (diaries === null) { return null };
 
         const moods = {};
@@ -79,7 +78,7 @@ async function gatherMoods(year, month) {
 
       } catch (err) {
         console.error("Catch an error: ", err);
-        return null;
+        return [];
 
       } finally {
         mongoose.connection.close();

@@ -3,7 +3,10 @@ import {
   CALENDAR_ACTIVATE_YEAR_SELECTOR,
   CALENDAR_DEACTIVATE_MONTH_SELECTOR,
   CALENDAR_DEACTIVATE_YEAR_SELECTOR,
-  CALENDAR_SET_DATE
+  CALENDAR_SET_DATE,
+  CALENDAR_FETCH_MOOD_REQUEST,
+  CALENDAR_FETCH_MOOD_SUCCESS,
+  CALENDAR_FETCH_MOOD_FAIL
 } from "src/constants/calendarConstants";
 
 function calendarSelectorReducer(state = {
@@ -50,7 +53,37 @@ function calendarDateReducer(state = {
   }
 }
 
+function CalendarMoodReducer(state = {
+  moods     : [],
+  fetching : false,
+  fetched  : false,
+  error    : null,
+}, action) {
+  switch (action.type) {
+    case CALENDAR_FETCH_MOOD_REQUEST:
+      return {
+        ...state,
+        fetching : true
+      };
+    case CALENDAR_FETCH_MOOD_FAIL:
+      return {
+        ...state,
+        fetching : false,
+        error     : action.payload
+      };
+    case CALENDAR_FETCH_MOOD_SUCCESS:
+      return {
+        ...state,
+        moods    : action.payload,
+        fetching : false,
+        fetched  : true
+      };
+    default: return state;
+  }
+}
+
 export {
   calendarSelectorReducer,
-  calendarDateReducer
+  calendarDateReducer,
+  CalendarMoodReducer
 };

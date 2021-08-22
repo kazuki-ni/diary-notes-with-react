@@ -1,23 +1,23 @@
 import { combineReducers } from "redux";
 
 import {
-  diaryFetchReducer,
-  diaryInitiallySetReducer,
+  diaryReducer,
   diaryEditReducer,
   diaryInputReducer
 } from "./diaryReducer";
 import {
   calendarSelectorReducer,
-  calendarDateReducer
+  calendarDateReducer,
+  CalendarMoodReducer
 } from "./calendarReducer";
 
 const reducer = combineReducers({
-  diaryFetchReducer,
-  diaryInitiallySetReducer,
+  diaryReducer,
   diaryEditReducer,
   diaryInputReducer,
   calendarSelectorReducer,
-  calendarDateReducer
+  calendarDateReducer,
+  CalendarMoodReducer
 });
 
 export default reducer;

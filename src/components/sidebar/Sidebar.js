@@ -2,7 +2,7 @@ import SidebarItem from './SidebarItem';
 import { sidebar_item, toggleSidebar } from './sidebarVariables';
 import './sidebar.css';
 
-const Sidebar = () => {
+export default function Sidebar() {
 
 	return (
 		<div className="sidebar">
@@ -26,7 +26,6 @@ const Sidebar = () => {
 						<SidebarItem
 							key = { key }
 							item = { item }
-							toggleSidebar = { toggleSidebar }
 						/>
 					)
 				})}
@@ -34,7 +33,3 @@ const Sidebar = () => {
 		</div>
 	);
 }
-
-
-
-export default Sidebar;

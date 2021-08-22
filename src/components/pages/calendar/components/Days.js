@@ -1,11 +1,12 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { useSelector, useDispatch } from "react-redux";
 import { useHistory } from 'react-router';
 
-import { setDiaryDate } from 'src/actions/diaryAction';
+import { fetchMoods } from 'src/actions/calendarActions';
+import { setDiaryDate } from "src/actions/diaryActions";
 
 import { checkToday, getHolidays, getDaysInMonth } from '../calendarFunctions';
-import { fetchMoods } from "src/actions/diaryActions";
+
 
 export default function Days() {
 	const history = useHistory();
@@ -14,6 +15,7 @@ export default function Days() {
   const year = useSelector( state => state.calendarDateReducer.year );
   const month = useSelector( state => state.calendarDateReducer.month );
   const date = new Date(year, month, 1);
+	const moods = useSelector(state => state.CalendarMoodReducer.moods)
 
   //* Dispatch
   const dispatch = useDispatch();
@@ -32,7 +34,8 @@ export default function Days() {
 	const today = checkToday(date);
 	const holidays = getHolidays(month);
 	const style = {gridColumnStart: firstDay};
-	const moods = fetchMoods(year, month);
+
+	useEffect( () => dispatch(fetchMoods(year, month)), []);
 
 	return (
 		days.map( day => {

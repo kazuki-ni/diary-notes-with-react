@@ -15,7 +15,7 @@ const toggleImageFunc = (action) => {
   }
 }
 
-const setDiaryImage =  (bool = true ) => {
+const layoutDiaryImage =  (bool = true ) => {
   if (!bool) {return}
 
   let img_area_w, img_area_h
@@ -63,4 +63,4 @@ const showURLofImgs = (newImgList) => {
   newImgList.map((url, i)=>console.log(`${i+1}: ${url.slice(0, 30)}`))
 };
 
-export { toggleImageFunc, setDiaryImage, gatherImgURLs, showURLofImgs };
+export { toggleImageFunc, layoutDiaryImage, gatherImgURLs, showURLofImgs };

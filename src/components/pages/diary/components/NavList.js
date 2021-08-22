@@ -1,16 +1,15 @@
 import React from 'react'
 import { useSelector, useDispatch } from "react-redux"
+import { useHistory } from 'react-router';
 
-import { inputDiary } from "src/actions/diaryActions";
-import { activateImageFunc, deactivateImageFunc } from 'src/actions/diaryAction';
+import { inputDiary, activateImageFunc, deactivateImageFunc, setDiaryImgs } from 'src/actions/diaryActions';
 
-import { toggleImageFunc, setDiaryImage, gatherImgURLs, showURLofImgs } from "../diaryFunctions";
+import { toggleImageFunc, layoutDiaryImage, gatherImgURLs, showURLofImgs } from "../diaryFunctions";
 
 export default function NavList() {
+	const history = useHistory()
   //* State
-	const { date, mood } = useSelector( state => state.diaryInitiallySetReducer.diary );
-	// date = date || today_date;
-	// mood = mood || "Normal";
+	const { date, mood } = useSelector( state => state.diaryReducer.diary );
 	const imageFuncActivated = useSelector( state => state.diaryEditReducer.imageFuncActivated )
 
 	//* Dispatch
@@ -20,6 +19,7 @@ export default function NavList() {
 		toggleImageFunc("OPEN");
 	};
 	const closeImage = () => {
+		dispatch(setDiaryImgs(gatherImgURLs()));
 		dispatch(deactivateImageFunc());
 		toggleImageFunc("CLOSE");
 	};
@@ -31,14 +31,16 @@ export default function NavList() {
 		//* [Before sending] Record img URLs
 		if (imageFuncActivated) showURLofImgs(newImgList);
 
-		inputDiary({
+		dispatch(
+			inputDiary({
 			date		: date,
 			mood		: mood,
 			bg			: document.getElementById("diary-root").style.backgroundImage,
 			imgList	: newImgList,
 			title		: document.getElementById("diary-title").value,
 			content	: document.getElementById("diary-content").value
-		});
+			})
+		).then(() => history.push('/'));
 	}
 
 	const imageBtnClicked = () => {
@@ -61,29 +63,20 @@ export default function NavList() {
 				openImage();
 
 				//* [After opening] Set a layout of diary images
-				setDiaryImage(imageFuncActivated);
+				layoutDiaryImage(imageFuncActivated);
 				break;
 
 			default: ;
 		}
 	}
 
-  const id_list = [
-    "input-btn",
-    "image-btn"
-  ]
-  const icon_list = [
-    "bx bx-message-square-check",
-    "bx bx-image-add"
-  ]
+  const id_list = ["input-btn", "image-btn"];
+  const icon_list = ["bx-message-square-check", "bx-image-add"];
   const tooltip_list = [
     "Done",
     (imageFuncActivated) ? "Close Image Window" : "Add Images"
   ]
-  const onClickList = [
-    inputBtnClicked,
-    imageBtnClicked
-  ]
+  const onClickList = [inputBtnClicked, imageBtnClicked];
 
   return (
     <ul className="nav-list">
@@ -94,7 +87,7 @@ export default function NavList() {
               id={id}
               onClick={onClickList[index]}
             >
-              <i className={icon_list[index]}/>
+              <i className={"bx "+icon_list[index]}/>
               <span className="nav-tooltip">{tooltip_list[index]}</span>
             </li>
           )

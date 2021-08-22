@@ -1,29 +1,44 @@
-import React from 'react';
-import { useSelector } from 'react-redux';
+import React, { useEffect } from 'react';
+import { useHistory, useLocation } from 'react-router';
+import { useSelector, useDispatch } from 'react-redux';
+
+import { deactivateImageFunc, setDiaryDate } from 'src/actions/diaryActions';
 
 import "./diary.scss"
 import NavList from "./components/NavList"
 import ImageList from "./components/ImageList"
 import DiaryImage from "./components/DiaryImage"
 import { months, today_date } from "src/components/pages/calendar/calendarVariables";
-import { setDiaryImage } from "./diaryFunctions";
+import { layoutDiaryImage } from "./diaryFunctions";
 
 export default function Diary() {
+	const history = useHistory();
+	const location = useLocation();
+	const dispatch = useDispatch();
+
 	//* State
-	let {
-    date, mood, bg, title, content
-	} = useSelector( state => state.diaryInitiallySetReducer.diary );
-	date = date || today_date;
-	mood = mood || "Normal";
+	const {
+    date, bg, title, content
+	} = useSelector( state => state.diaryReducer.diary );
+
+	if (location.pathname === "/diary") {
+		console.log("Move to today's howareyou");
+    dispatch(setDiaryDate(today_date));
+    history.push('/howareyou');
+	}
+
 	const date_num = date.split("_");
-	const day = parseInt(date_num[1].slice(2, 4));
-	const month = months[(parseInt(date_num[1].slice(0, 2))-1)];
+	const month_day = String(date_num[1]);
+	const day = Number(month_day.slice(2, 4));
+	const month = months[(Number(month_day.slice(0, 2))-1)];
 	const year = date_num[0];
 
-	const imageFuncActivated = useSelector( state => state.diaryEditReducer.imageFuncActivated )
+	const imageFuncActivated = useSelector( state => state.diaryEditReducer.imageFuncActivated );
 
 	//* Set a layout of diary images according to the window size
-	window.onresize = () => setDiaryImage(imageFuncActivated);
+	window.onresize = () => layoutDiaryImage(imageFuncActivated);
+
+	useEffect(deactivateImageFunc, [])
 
 	return (
 		<div

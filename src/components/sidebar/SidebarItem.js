@@ -1,9 +1,15 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
+import { useDispatch } from 'react-redux';
+
+import { setDiaryDate } from 'src/actions/diaryActions';
 
 import { toggleSidebar } from './sidebarVariables';
+import { today_date } from '../pages/calendar/calendarVariables';
 
-const SidebarItem = ( props ) => {
+export default function SidebarItem( props ) {
+	//* Dispatch
+	const dispatch = useDispatch();
 
 	const item_key = Object.keys(props.item)[0];
 	const item = props.item[item_key]
@@ -15,7 +21,7 @@ const SidebarItem = ( props ) => {
 				<li>
 					<i
 						className={'bx ' + item.icon}
-						onClick={props.toggleSidebar}
+						onClick={toggleSidebar}
 					/>
 					<input type="text" placeholder={item.links_name} />
 					<span className="tooltip">{item.tooltip}</span>
@@ -60,11 +66,21 @@ const SidebarItem = ( props ) => {
 
 		//* except for the above two
 		default:
+			let icon;
+			if (item_key === "Diary") {
+				icon =
+					<i
+						className={'bx ' + item.icon}
+						onClick={() => dispatch(setDiaryDate(today_date))}
+					/>
+			} else {
+				icon = <i className={'bx ' + item.icon} />
+			}
 
 			return (
 				<li className="SidebarItem">
 					<Link to={item.href}>
-						<i className={'bx ' + item.icon} />
+						{ icon }
 						<span
 							className="links_name"
 							onClick={toggleSidebar}
@@ -77,5 +93,3 @@ const SidebarItem = ( props ) => {
 			)
 	}
 }
-
-export default SidebarItem;

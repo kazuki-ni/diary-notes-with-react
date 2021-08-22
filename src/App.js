@@ -1,33 +1,12 @@
-import { Component } from "react";
+import React from 'react'
 import { Route } from "react-router-dom";
 
 import './App.css';
+import { HowAreYou, Dashboard, Calendar, Diary, Discover, Account, Liked, Bookmark, Setting } from './components';
 
-import HowAreYou from "./components/pages/howareyou/HowAreYou";
+export default function App() {
 
-import Dashboard from "./components/pages/dashboard/Dashboard"
-import Calendar from "./components/pages/calendar/Calendar"
-import Diary from "./components/pages/diary/Diary"
-import Discover from "./components/pages/discover/Discover"
-import Account from "./components/pages/account/Account"
-import Liked from "./components/pages/liked/Liked"
-import Bookmark from "./components/pages/bookmark/Bookmark"
-import Setting from "./components/pages/setting/Setting"
-
-import { today_date } from "src/components/pages/calendar/calendarVariables";
-
-class App extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      mood: "Normal",
-      date: today_date
-    }
-  console.log(this.state)
-  }
-
-  render() {
-    return (
+  return (
     <div className="App">
       <Route exact path="/" component={Dashboard} />
       <Route path="/howareyou" component={HowAreYou} />
@@ -42,8 +21,6 @@ class App extends Component {
       <Route path="/bookmark" component={Bookmark} />
       <Route path="/setting" component={Setting} />
     </div>
-    )
-  }
-}
+  )
 
-export default App;
+}

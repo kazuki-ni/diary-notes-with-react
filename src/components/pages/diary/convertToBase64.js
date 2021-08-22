@@ -72,7 +72,7 @@ const addLi_each = async (file, index) => {
   const b64 = await image2base64(file, MAX_LENGTH);
   // img.src = URL.createObjectURL(file);
   img.src = b64;
-  img.alt = ""
+  img.alt = "";
   // img.onload = () => { URL.revokeObjectURL(img.src) };
   li.appendChild(img);
   if (list.childElementCount === 5) {

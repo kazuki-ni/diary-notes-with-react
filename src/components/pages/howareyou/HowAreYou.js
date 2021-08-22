@@ -1,36 +1,38 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { Link, withRouter } from 'react-router-dom'
 import { useHistory } from 'react-router'
 import { useDispatch, useSelector } from 'react-redux'
 
-// import { fetchSingleDiary } from '../../../actions/diaryActions'
-import { setDiaryAll } from 'src/actions/diaryAction'
+import { fetchSingleDiary, setDiaryMood } from '../../../actions/diaryActions'
 import mood_imgs from "./moodImagePath"
 import "./howareyou.scss"
 import { today_date } from '../calendar/calendarVariables'
 
 function HowAreYou() {
+	const history = useHistory();
 
 	//* State
-	const history = useHistory();
-	const { diary } = useSelector(state => state.diaryInitiallySetReducer );
-	const mood = diary.mood;
+	const { diary } = useSelector(state => state.diaryReducer );
 	const date = diary.date || today_date;
-	if (mood) {
-		console.log("mood: ", mood);
-		console.log("Diary has been written. Move to the diary page.");
-		history.push("/diary/" + date);
-	} else {
-		console.log("Diary hasn't been written yet. Stay in this page.");
-	}
 
 	//* Dispatch
 	const dispatch = useDispatch();
-	const moodHandler = mood => {
-		diary.mood = mood;
-		diary.date = date;
-		dispatch(setDiaryAll(diary));
+	const moodHandler = mood => dispatch(setDiaryMood(mood));
+
+	//* Check DB
+	const fetchDiary = () => {
+		dispatch(fetchSingleDiary(date))
+			.then( mood => {
+				if (mood) {
+					console.log("Diary has been written. Move to the diary page.");
+					history.push("/diary/" + date);
+				} else {
+					console.log("Diary hasn't been written yet. Stay in this page.");
+				}
+			})
 	}
+
+	useEffect(fetchDiary, [])
 
 	return (
 		<div id="howareyou">

@@ -1,0 +1,99 @@
+#account-root{
+  font-family: serif, "Times New Roman";
+  height: 100vh;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+
+  #sign-img{
+    height: 100vh;
+    background: center / cover no-repeat url("./initialImage.jpg");
+    transition-duration: 1s;
+  }
+
+  .sign-form{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    padding: 30px;
+    .form-container {
+      display: flex;
+      flex-direction: column;
+      height: 80vh;
+      width: 100%;
+      padding: 2rem;
+      border-radius: 0.5rem;
+      list-style-type: none;
+      li {
+        display: flex;
+        flex-direction: column;
+        height: 20%;
+        // margin-bottom: 1rem;
+        // margin-top: 1rem;
+        input {
+          font-size: 16px;
+          width: 100%;
+          border: none;
+          outline: none;
+          padding-bottom: 8px;
+          box-sizing: border-box;
+          &:focus + .form-underline::before,
+          &:focus + .form-underline::after{
+            width: 50%;
+          }
+        }
+        .form-underline{
+          position: relative;
+          border-top: 1px solid #c2c2c2;
+          &::before, &::after{
+            position: absolute;
+            bottom: 0px;
+            width: 0px;
+            height: 1px;
+            content: '';
+            background-color: #3be5ae;
+            transition: all 0.5s;
+            -webkit-transition: all 0.5s;
+          }
+          &::before{
+            left: 50%;
+          }
+          &::after{
+            right: 50%;
+          }
+        }
+
+      }
+    }
+    div{
+      padding: 0 30px;
+      width: 100%;
+      display: flex;
+      flex-direction: row;
+      justify-content: space-evenly;
+      .btn{
+        border: none;
+        border-radius: 30px;
+        padding: 16px 32px;
+        margin: 4px 2px;
+        width: 120px;
+        text-decoration: none;
+        cursor: pointer;
+      }
+      .primary{
+        background-color: #4CAF50;
+        color: white;
+        &:hover{
+          background-color: #5fbb62;
+        }
+      }
+      .secondary{
+        background-color: transparent;
+        &:hover{
+          text-decoration: underline;
+        }
+      }
+    }
+  }
+}

@@ -1,19 +1,19 @@
 import axios from 'axios'
 import {
-  // DIARY_ACTIVATE_IMAGE,
-  // DIARY_DEACTIVATE_IMAGE,
-  // DIARY_SET_DATE,
-  // DIARY_SET_MOOD,
-  // DIARY_SET_CONTENT,
+  DIARY_ACTIVATE_IMAGE,
+  DIARY_DEACTIVATE_IMAGE,
+  DIARY_SET_DATE,
+  DIARY_SET_MOOD,
+  DIARY_SET_IMAGES,
+  DIARY_SET_ALL,
   DIARY_FETCH_REQUEST,
   DIARY_FETCH_FAIL,
   DIARY_FETCH_SUCCESS,
+  DIARY_FETCH_SUCCESS_BUT_NO_DIARY,
   DIARY_INPUT_REQUEST,
   DIARY_INPUT_FAIL,
   DIARY_INPUT_SUCCESS
 } from "src/constants/diaryConstants";
-
-import { months } from 'src/components/pages/calendar/calendarVariables';
 
 const HOST = "http://localhost:9000"
 
@@ -25,10 +25,10 @@ export const inputDiary = diary => async dispatch => {
 
   try {
     dispatch({type: DIARY_INPUT_REQUEST});
-    const res = await axios.post( HOST + '/api/diary/input', diary);
+    const { data } = await axios.post( HOST + '/api/diary/input', diary);
+    console.log(data);
     dispatch({type: DIARY_INPUT_SUCCESS});
-    console.log(res.data);
-    this.props.history.push('/');
+
   } catch (err) {
     alert("Failed to input diary to DB");
     dispatch({type: DIARY_INPUT_FAIL, payload: err});
@@ -39,46 +39,79 @@ export const inputDiary = diary => async dispatch => {
 export const fetchSingleDiary = date => async dispatch => {
   console.log("Go check if DB has a diary of "+ date)
 
-  dispatch({type: DIARY_FETCH_REQUEST});
-  await axios.get( HOST + '/api/diary/' + date)
-    .then( res => {
-      dispatch({type: DIARY_FETCH_SUCCESS, payload: res.data});
-      console.log("Fetched diary from DB successfully");
-      // const result = res.data || null;
-    })
-    .catch( err => {
-      console.warn("Failed to fetch diary from DB");
-      dispatch({type: DIARY_FETCH_FAIL, payload: err});
-    })
+  try {
+    dispatch({type: DIARY_FETCH_REQUEST});
+    const { mood, bg, title, content, imgList } = await axios.get(
+      HOST + '/api/diary?', {
+        params: {
+          date: date
+        }
+      }
+    )
+    console.log("Fetched diary from DB successfully");
+    switch(mood) {
+      case "":
+        dispatch({type: DIARY_FETCH_SUCCESS_BUT_NO_DIARY});
+        break;
+      default:
+        dispatch({
+          type: DIARY_FETCH_SUCCESS,
+          payload: {
+            date: date,
+            mood: mood || "",
+            bg: bg || "url(\"/images/scenes/2.jpg\")",
+            title: title || "",
+            content: content || "",
+            imgList: imgList || []
+          }
+        });
+        break;
+    }
+    return mood;
+
+  } catch (err) {
+    console.warn("Failed to fetch diary from DB");
+    dispatch({type: DIARY_FETCH_FAIL, payload: err});
+    return ""
+  }
 }
 
-export const fetchMoods = (year, month) => {
-  console.log("Go fetch moods of", months[month], year);
-
-  // const moods = await axios.get( HOST + '/api/diary/mood/', {
-  //   year : year,
-  //   month: month
-  // })
-  //   //* Success
-  //   .then( res => {
-  //     console.log("Fetched moods from DB successfully");
-  //     const result = res.data;
-  //     return result; // => moods
-  //   })
-  //   //* Failure
-  //   .catch( err => {
-  //     console.warn("Failed to fetch moods from DB");
-  //     console.error(err);
-  //     return {}; // => moods
-  //   } )
-  const moods = {
-    '1': 'Happy',
-    '2': 'Normal',
-    '3': 'Rad',
-    '4': 'Rad',
-    '5': 'Happy',
-    '6': 'Sad'
+export function setDiaryDate(date) {
+  return {
+    type: DIARY_SET_DATE,
+    payload: date
   }
+}
 
-  return moods;
+export function setDiaryMood(mood) {
+  return {
+    type: DIARY_SET_MOOD,
+    payload: mood
+  }
+}
+
+export function setDiaryImgs(imgList) {
+  return {
+    type: DIARY_SET_IMAGES,
+    payload: imgList
+  }
+}
+
+export function setDiaryAll(diary) {
+  return {
+    type: DIARY_SET_ALL,
+    payload: diary
+  }
+}
+
+export function activateImageFunc() {
+  return {
+    type: DIARY_ACTIVATE_IMAGE
+  }
+}
+
+export function deactivateImageFunc() {
+  return {
+    type: DIARY_DEACTIVATE_IMAGE
+  }
 }
