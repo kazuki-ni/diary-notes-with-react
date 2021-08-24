@@ -1,4 +1,4 @@
-import Diary from "./models/diaryModel.js"
+import Diary from "../models/diaryModel.js"
 import connectMongo from "./database.js"
 
 async function insertDiary(diary) {

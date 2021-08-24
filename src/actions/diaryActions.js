@@ -15,17 +15,20 @@ import {
   DIARY_INPUT_SUCCESS
 } from "src/constants/diaryConstants";
 
-const HOST = "http://localhost:9000"
+const HOST = "http://localhost:9000";
 
 //* diary => ()
 export const inputDiary = diary => async dispatch => {
 
   console.log(diary)
   console.log("is to be inputted")
+  dispatch({type: DIARY_INPUT_REQUEST});
 
   try {
-    dispatch({type: DIARY_INPUT_REQUEST});
-    const { data } = await axios.post( HOST + '/api/diary/input', diary);
+    const { data } = await axios.post(
+      HOST + '/api/diary/input',
+      diary
+    );
     console.log(data);
     dispatch({type: DIARY_INPUT_SUCCESS});
 
@@ -37,10 +40,11 @@ export const inputDiary = diary => async dispatch => {
 
 //* date => diary
 export const fetchSingleDiary = date => async dispatch => {
+
   console.log("Go check if DB has a diary of "+ date)
+  dispatch({type: DIARY_FETCH_REQUEST});
 
   try {
-    dispatch({type: DIARY_FETCH_REQUEST});
     const { mood, bg, title, content, imgList } = await axios.get(
       HOST + '/api/diary?', {
         params: {

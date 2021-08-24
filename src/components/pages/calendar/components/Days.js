@@ -15,7 +15,7 @@ export default function Days() {
   const year = useSelector( state => state.calendarDateReducer.year );
   const month = useSelector( state => state.calendarDateReducer.month );
   const date = new Date(year, month, 1);
-	const moods = useSelector(state => state.CalendarMoodReducer.moods)
+	const moods = useSelector(state => state.calendarMoodReducer.moods)
 
   //* Dispatch
   const dispatch = useDispatch();
@@ -35,7 +35,7 @@ export default function Days() {
 	const holidays = getHolidays(month);
 	const style = {gridColumnStart: firstDay};
 
-	useEffect( () => dispatch(fetchMoods(year, month)), []);
+	useEffect( () => dispatch(fetchMoods(year, month)), [dispatch, year, month]);
 
 	return (
 		days.map( day => {

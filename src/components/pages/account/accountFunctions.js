@@ -17,4 +17,6 @@ const changeBg = () => {
 
 }
 
-export {changeBg};
+export {
+  changeBg
+};

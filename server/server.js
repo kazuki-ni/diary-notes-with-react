@@ -1,9 +1,10 @@
-import { config } from "./config.js"
-import diaryRoute from './routes/diaryRoute.js';
-
 import cors from "cors";
 import express from 'express';
 import mongoose from 'mongoose';
+import { config } from "./config.js"
+
+import diaryRoute from './routes/diaryRoute.js';
+import userRoute from './routes/userRoute.js';
 
 const mongodbUrl = config.MONGODB_URL;
 mongoose
@@ -30,6 +31,7 @@ app.use(express.urlencoded({
 
 //* route path
 app.use('/api/diary', diaryRoute);
+app.use('/api/user', userRoute);
 
 app.listen(config.PORT, () => {
   console.log('Server started at http://localhost:9000');

@@ -1,6 +1,7 @@
 #howareyou{
     background: linear-gradient(to bottom right, #6be585, #c471ed, #f64f59);
     min-height: 100vh;
+    user-select: none;
 
     h1#title{
         padding-top: 12vh;

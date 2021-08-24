@@ -4,12 +4,18 @@ import {
   diaryReducer,
   diaryEditReducer,
   diaryInputReducer
-} from "./diaryReducer";
+} from "./diaryReducers";
 import {
   calendarSelectorReducer,
   calendarDateReducer,
-  CalendarMoodReducer
-} from "./calendarReducer";
+  calendarMoodReducer
+} from "./calendarReducers";
+import {
+  userLogInReducer,
+  userSignUpReducer,
+  userUpdateReducer,
+  userLogOutReducer
+} from "./userReducers";
 
 const reducer = combineReducers({
   diaryReducer,
@@ -17,7 +23,11 @@ const reducer = combineReducers({
   diaryInputReducer,
   calendarSelectorReducer,
   calendarDateReducer,
-  CalendarMoodReducer
+  calendarMoodReducer,
+  userLogInReducer,
+  userSignUpReducer,
+  userUpdateReducer,
+  userLogOutReducer
 });
 
 export default reducer;

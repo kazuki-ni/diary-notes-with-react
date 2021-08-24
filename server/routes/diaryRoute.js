@@ -1,6 +1,6 @@
 import express from 'express';
 
-import { insertDiary, findDiary, gatherMoods } from '../operateDiaryDB.js';
+import { insertDiary, findDiary, gatherMoods } from '../DB/diaryDB.js';
 
 const router = express.Router();
 

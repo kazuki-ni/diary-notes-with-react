@@ -53,7 +53,7 @@ function calendarDateReducer(state = {
   }
 }
 
-function CalendarMoodReducer(state = {
+function calendarMoodReducer(state = {
   moods     : [],
   fetching : false,
   fetched  : false,
@@ -85,5 +85,5 @@ function CalendarMoodReducer(state = {
 export {
   calendarSelectorReducer,
   calendarDateReducer,
-  CalendarMoodReducer
+  calendarMoodReducer
 };

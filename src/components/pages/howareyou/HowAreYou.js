@@ -32,7 +32,7 @@ function HowAreYou() {
 			})
 	}
 
-	useEffect(fetchDiary, [])
+	useEffect(fetchDiary, [dispatch, history, date])
 
 	return (
 		<div id="howareyou">
